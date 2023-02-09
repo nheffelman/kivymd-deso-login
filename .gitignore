@@ -6,6 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# ignore ALL .log files
+*.log
+
+# ignore ALL files in ANY directory named temp
+temp/ 
+__pychache__
+
 # Distribution / packaging
 .Python
 build/
