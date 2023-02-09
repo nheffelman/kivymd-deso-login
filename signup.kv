@@ -1,0 +1,423 @@
+#:kivy 2.0.0
+#:import CircularAvatarImage main.CircularAvatarImage
+#:import StoryCreator main.StoryCreator
+#:import kivymd kivymd
+
+
+
+#login screen
+<LoginScreen>:
+    name: 'login'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '10dp'
+        spacing: '10dp'
+        
+        Label:
+            text: 'Login to ###'
+            font_size: '20sp'
+            text_size: self.size
+            halign: 'center'
+        Label:
+            text: 'Read-only Mode'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+        MDRoundFlatButton:
+            on_press: root.manager.current = 'username_login'
+            text: 'Login with Username'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+        Label:
+            text: 'Full Access Mode'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+        MDRoundFlatButton:
+            on_press: root.manager.current = 'seed_login'
+            text: 'Login with Seed Phrase'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+        Label:
+            text: 'Full Access Mode'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+
+        Label:
+            text: "Don't have a Deso Account, Sign Up"
+            font_size: '15sp'
+            text_size: self.size
+            halign: 'center'
+            color: (0, 0, 1, 1)
+            
+        MDRoundFlatButton:
+            text: 'Create a new Seed Phrase'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+            on_press: root.manager.current = 'signup'
+        
+
+#seed login screen
+<SeedLoginScreen>:
+    name: 'seed_login'
+    MDBoxLayout:
+        orientation: 'vertical'
+        # App Bar
+        MDBoxLayout:
+            adaptive_height: True
+            id: appbar
+            MDIconButton:
+                icon: 'arrow-left'
+                on_press: root.manager.current = 'login'
+            MDLabel:
+                id: username
+                text: 'Deso'
+                halign: 'center'
+                valign: 'top'
+                font_size: 50
+                
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: '10dp'
+            spacing: '10dp'
+            
+            
+            MDLabel:
+                text: 'Login with Seed Phrase'
+                font_size: '20sp'
+                text_size: self.size
+                
+                halign: 'center'
+            MDTextField:
+                id: seedphrase
+                hint_text: 'Seed Phrase'
+                pos_hint: {'center_x': 0.5}
+                size_hint: (0.8, None)
+                #height: '40dp'
+                multiline: True
+                on_text_validate: root.textInput(self)
+            MDTextField:
+                id: userName
+                hint_text: 'Username'
+                pos_hint: {'center_x': 0.5}
+                size_hint: (0.8, None)
+                height: '40dp'
+                on_text_validate: root.textInput(self)
+            MDRoundFlatButton:
+                text: 'Login'
+                pos_hint: {'center_x': 0.5}
+                size_hint: (0.8, None)
+                height: '40dp'
+                on_press: root.onClick()
+			Widget:
+
+
+<SignupScreen>:
+    name: 'signup'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '10dp'
+        spacing: '10dp'
+        
+        Label:
+            text: 'Sign up to check out the newest iteration of Deso.'
+            font_size: '20sp'
+            text_size: self.size
+            halign: 'center'
+        MDTextField:
+            hint_text: 'Email'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+        MDTextField:
+            hint_text: 'Username'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+        
+        Button:
+            text: 'Create a new Seed Phrase'
+            size_hint: (0.8, None)
+            height: '40dp'
+            pos_hint: {'center_x': 0.5}
+            on_press: root.manager.current = 'seed_verify'
+            
+        Label:
+            text: 'By signing up, you agree to our Terms & Privacy Policy.'
+            font_size: '10sp'
+            text_size: self.size
+            halign: 'center'
+        MDRoundFlatButton:
+        	on_press: root.manager.current = 'login'
+        	pos_hint: {'center_x': 0.5}
+            text: 'Have an account? Log in'
+        	font_size: '15sp'
+       	 text_size: self.size
+    	    halign: 'center'
+            color: (0, 0, 1, 1)
+        	underline: True
+            
+<SeedVerifyScreen>:
+    name: 'seed_verify'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '10dp'
+        spacing: '10dp'
+        
+        Label:
+            text: 'Verify your seed phrase'
+            font_size: '20sp'
+            text_size: self.size
+            halign: 'center'
+
+        MDTextField:
+            hint_text: 'Seed Phrase'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+            multiline: True
+            id: seedphrase
+
+        MDTextField:
+            hint_text: 'Username'
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.8, None)
+            height: '40dp'
+            id: username
+        
+        Button:
+            text: 'Verify'
+            size_hint: (0.8, None)
+            height: '40dp'
+            pos_hint: {'center_x': 0.5}
+            on_press: root.manager.current = 'seed_verify'
+            
+        Label:
+            text: 'By signing up, you agree to our Terms & Privacy Policy.'
+            font_size: '10sp'
+            text_size: self.size
+            halign: 'center'
+        MDRoundFlatButton:
+        	on_press: root.manager.current = 'login'
+        	pos_hint: {'center_x': 0.5}
+            text: 'Have an account? Log in'
+        	font_size: '15sp'
+       	 text_size: self.size
+    	    halign: 'center'
+            color: (0, 0, 1, 1)
+        	underline: True
+            
+<UserNameLoginScreen>:
+    name: 'username_login'
+    MDBoxLayout:
+        orientation: 'vertical'
+        # App Bar
+        MDBoxLayout:
+            adaptive_height: True
+            id: appbar
+            MDIconButton:
+                icon: 'arrow-left'
+                on_press: root.manager.current = 'login'
+            MDLabel:
+                id: username
+                text: 'Deso'
+                halign: 'center'
+                valign: 'top'
+                font_size: 50
+               # font_name: 'assets/Instafont.otf'
+    
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: '10dp'
+            spacing: '10dp'
+            Image:
+                source: 'assets/dragon.png'
+                size_hint: (1, 1)
+            MDLabel:
+                text: 'Login with Username'
+                font_size: '20sp'
+                text_size: self.size
+                halign: 'center'
+            MDTextField:
+                id: username
+                hint_text: 'Username'
+                pos_hint: {'center_x': 0.5}
+                size_hint: (0.8, None)
+                height: '40dp'
+                on_text_validate: root.textInput(self)
+            MDRoundFlatButton:
+                text: 'Login'
+                pos_hint: {'center_x': 0.5}
+                size_hint: (0.8, None)
+                height: '40dp'
+                on_press: root.onClick()
+        Widget:
+            
+
+
+
+
+
+<HomePageReadOnlyScreen>:
+
+    name: 'homepage_read_only'
+    orientation: 'vertical'
+    
+    MDNavigationLayout:
+        MDScreenManager:
+
+            MDScreen:
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    
+                    # App Bar
+                    MDBoxLayout:
+                        adaptive_height: True 
+                        anchor: 'top'
+                        id: appbar
+                        size_hint: (1, .2)
+
+                        CircularAvatarImage:
+                            avatar: root.profile_picture
+                            size: '50dp', '50dp'
+                            on_press  : nav_drawer.set_state("open")
+                    
+                        MDLabel:
+                            id: username
+                            text_size: self.size
+                            text: 'Deso'
+                            halign: 'center'
+                            valign: 'top'
+                            font_size: 28
+                            
+                        MDLabel:
+                            halign: 'right'
+                            id: desoprice
+                            text: root.desoprice
+                    MDBoxLayout:
+                        size_hint: (1, .8)
+                            
+                   
+        MDNavigationDrawer:
+            id: nav_drawer
+            radius: (0, 16, 16, 0)
+
+            MDNavigationDrawerMenu:
+
+                MDNavigationDrawerHeader:
+                    title: "Account Info"
+                    title_color: "#4a4939"
+                    text: root.username
+                    spacing: "4dp"
+                    padding: "12dp", 0, 0, "56dp"
+
+                DrawerClickableItem:
+                    icon: "account"
+                    text: "Profile"
+                    
+
+                DrawerClickableItem:
+                    icon: "send"
+                    right_text: "+99"
+                    text: "Outbox"
+                    text_right_color: "#4a4939"
+
+                MDNavigationDrawerDivider:
+
+                MDNavigationDrawerLabel:
+                    text: "Labels"
+
+                DrawerClickableItem:
+                    icon: "home"
+                    text: "Home"
+
+                DrawerClickableItem:
+                    icon: "close"
+                    text: "Log out"
+                    on_press: root.logout()
+
+
+                            
+                    
+
+<Circle@MDCard>
+    size_hint: None, None
+    elevation: 0
+    pos_hint: {"center_x": 0.5, "center_y": 0.6}
+
+<CircularAvatarImage>
+    size_hint: None, None
+    size: 62, 100
+    elevation: 0
+
+    MDRelativeLayout:
+        size_hint: None, None
+        size: 60, 100
+
+        Circle:
+            radius: [50, ]
+            size: 60, 60
+            md_bg_color: 1,0,0,1
+
+        Circle:
+            radius: [50, ]
+            size: 55, 55
+            md_bg_color: 1,1,1,1
+
+        # profile picture
+        FitImage:
+            id: avatar
+            source: root.avatar
+            size_hint: None, None
+            size: 53, 53
+            radius: [53]
+            pos_hint: {"center_x":0.5, "center_y":0.6}
+
+        # Username
+        MDLabel:
+            id: name
+            text: root.name
+            halign: 'center'
+            pos_hint: {"center_x:": 0.5, "center_y": 0.2}
+            font_size: 11
+            theme_text_color: "Custom"
+            text_color: 0,0,0,  
+    
+    
+                
+
+
+<MyLabel@MDLabel>
+    adaptive_height:True
+    font_size: 24
+
+<HalfOpacityLabel@MyLabel>:
+    theme_text_color: 'Custom'
+    text_color: 0,0,0,0.5
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: "#e7e4c0"
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    ripple_color: "#c5bdd2"
+    selected_color: "#0c6c4d"
+
+
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True
+
+
+    
+        
+
+    
+
+        
